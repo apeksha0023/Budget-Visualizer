@@ -29,6 +29,7 @@ Other libraries/tools:
 - Vercel (Frontend Hosting)
 - Render (Backend Hosting)
 - Dotenv, CORS, and more
+- Tailwind CSS
 
 ---
 
