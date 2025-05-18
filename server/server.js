@@ -10,20 +10,32 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB
+// ✅ Connect to MongoDB
 connectDB();
 
-// Middleware
-app.use(cors());
+// ✅ CORS configuration (important)
+const allowedOrigins = ['http://localhost:5173'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
+// ✅ Middleware
 app.use(express.json());
 
-// Routes
+// ✅ Routes
 app.use('/api/transactions', transactionRoutes);
 
-// Error handler
+// ✅ Error handler middleware
 app.use(errorHandler);
 
-// Start server
+// ✅ Start server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
