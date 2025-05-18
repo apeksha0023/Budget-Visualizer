@@ -14,17 +14,8 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // ✅ CORS configuration (important)
-const allowedOrigins = ['http://localhost:5173'];
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
+app.use(cors()); // ← for development only, allows all origins
+
 
 // ✅ Middleware
 app.use(express.json());
